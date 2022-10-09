@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+<body>
+  <form name="my_form">
+    <p>Введите 1-e число:</p>
+    <input name="num_a">
+    <p>Введите 2-e число:</p>
+    <input name="num_b">
+    <p></p><input type="button" value="Send" onclick="fn_1();"></p>
+  </form>
+<!--
+Обязательное задание.
+
+Необходимо попросить пользователя ввести два числа в переменные `a` и `b`.
+Необходимо вывести в консоль один результат из следующих проверок:
+1. Если оба числа в переменных `a` и `b` положительные, вывести разность
+чисел `a` и `b`, а именно, вычесть из переменной `a` значение переменной `b`.
+2. Если оба числа в переменных `a` и `b` отрицательные, вывести произведение
+чисел `a` и `b`.
+3. Если числа в переменных `a` и `b` разных знаков, вывести сумму чисел
+`a` и `b`.
+В остальных случаях программа не должна ничего выводить.
+-->
+<script>
+  "use strict";
+function fn_1(){
+  let my_form = document.forms.my_form
+  let a = Number(my_form.elements.num_a.value)
+  let b = Number(my_form.elements.num_b.value)
+  if (a>=0 && b >=0){
+    console.log(`${a} - ${b} = ${a-b}`)
+  }
+  if (a<0 && b <0){
+    console.log(`${a} * ${b} = ${a*b}`)
+  }
+  if (a*b<0){
+    console.log(`${a} + ${b} = ${a+b}`)
+  }
+
+}
+  // Здесь пишем решение, данный комментарий необходимо стереть.
+</script>
+</body>
+</html>
