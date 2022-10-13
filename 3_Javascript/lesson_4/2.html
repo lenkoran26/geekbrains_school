@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+<body>
+<!--
+Необязательное задание, но желательно сделать.
+
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для поста в социальной сети.
+Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
+Пост должен хранить:
+1. Автора поста (имени достаточно).
+2. Текст поста.
+3. Дату и время последнего изменения поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
+менять текст поста.
+
+---
+
+Необходимо создать функцию-конструктор/класс для закрепленного поста в
+социальной сети.
+Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
+Закрепленный пост должен наследоваться от обычного поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
+будет лежать значение false (это свойство будет обозначать, будет ли наш
+закрепленный пост подсвечен).
+У экземпляров объекта закрепленного поста должен быть метод с названием
+`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
+(будет менять свойство `highlighted`).
+
+---
+
+Подсказки:
+1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
+2. Обратите внимание что пост хранит "дату и время последнего изменения
+поста", это значит что если пост кто-то изменит (например вызовет какой-то
+метод, который изменит что-то в посте), дата и время последнего изменения
+поста также должна измениться.
+3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
+что-нибудь пропустить.
+4. Если непонятно условие - задайте вопрос.
+-->
+<script>
+  "use strict";
+  function PostES5(author, post_text){
+    this.author = author
+    this.post_text = post_text
+    this.update_at = Date()
+  }
+
+  PostES5.prototype.edit = function(new_post_test){
+    this.post_text = new_post_test
+    this.update_at = Date()
+  }
+  const post_es5 = new PostES5('alex', 'my_text_post')
+  console.log(`Author - ${post_es5.author}, Post - ${post_es5.post_text}, update - ${post_es5.update_at}`)
+  
+  post_es5.edit('new_text_post')
+  console.log(`Author - ${post_es5.author}, Post - ${post_es5.post_text}, update - ${post_es5.update_at}`)
+
+  console.log('-----------------------------------------------------------------------------------------------')
+  
+  class PostES6{
+    constructor(author, post_text){
+      this.author = author
+      this.post_text = post_text
+      this.update_at = Date()
+    }
+
+    edit(new_post_text){
+      this.post_text = new_post_text
+      this.update_at = Date()
+    }
+  }
+
+  const post_es6 = new PostES6('Dmitry', 'my_text_post')
+  console.log(`Author - ${post_es6.author}, Post - ${post_es6.post_text}, update - ${post_es6.update_at}`)
+  
+  post_es6.edit('new_text_post')
+  console.log(`Author - ${post_es6.author}, Post - ${post_es6.post_text}, update - ${post_es6.update_at}`)
+
+  console.log('-----------------------------------------------------------------------------------------------')
+
+  function AttachedPostES5(author, post_text){
+    PostES5.call(this, author, post_text)
+    this.highlighted = false
+  }
+
+  AttachedPostES5.prototype = Object.create(PostES5.prototype)
+  AttachedPostES5.constructor = AttachedPostES5
+  AttachedPostES5.prototype.makeTextHighlighted = function(){
+    this.highlighted = true
+    this.update_at = Date()
+  }
+
+  const attach_post_es5 = new AttachedPostES5('Marina', 'my_text_post')
+  console.log(`Author - ${attach_post_es5.author}, Post - ${attach_post_es5.post_text}, update - ${attach_post_es5.update_at}, highlighted - ${attach_post_es5.highlighted}`)
+  
+  attach_post_es5.edit('new_text_post')
+  attach_post_es5.makeTextHighlighted()
+  
+  console.log(`Author - ${attach_post_es5.author}, Post - ${attach_post_es5.post_text}, update - ${attach_post_es5.update_at}, highlighted - ${attach_post_es5.highlighted}`)
+
+  console.log('-----------------------------------------------------------------------------------------------')
+
+  class AttachedPostES6 extends PostES6{
+    constructor(author, post_text){
+      super(author, post_text)
+    }
+    highlighted = false
+    makeTextHighlighted(){
+      this.highlighted = true
+      this.update_at = Date()
+  }
+}
+  const attach_post_es6 = new AttachedPostES6('Sergey', 'my_text_post')
+  console.log(`Author - ${attach_post_es6.author}, Post - ${attach_post_es6.post_text}, update - ${attach_post_es6.update_at}, highlighted - ${attach_post_es6.highlighted}`)
+  
+  attach_post_es6.edit('new_text_post')
+  attach_post_es6.makeTextHighlighted()
+  
+  console.log(`Author - ${attach_post_es6.author}, Post - ${attach_post_es6.post_text}, update - ${attach_post_es6.update_at}, highlighted - ${attach_post_es6.highlighted}`)
+</script>
+</body>
+</html>
